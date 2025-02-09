@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/mnt/samsung_nvme_1tb/source_cd_dirs/cplusplus-task-management/scripts/scripts_tests/cmake/test_helpers/test_generate_args_for_launch_json_gen_script/custom_targets/hello_world/build",
+  "command": "/usr/bin/g++ -g -o CMakeFiles/hello_world.dir/hello_world.cpp.o -c /mnt/samsung_nvme_1tb/source_cd_dirs/cplusplus-task-management/scripts/scripts_tests/cmake/test_helpers/test_generate_args_for_launch_json_gen_script/custom_targets/hello_world/hello_world.cpp",
+  "file": "/mnt/samsung_nvme_1tb/source_cd_dirs/cplusplus-task-management/scripts/scripts_tests/cmake/test_helpers/test_generate_args_for_launch_json_gen_script/custom_targets/hello_world/hello_world.cpp",
+  "output": "CMakeFiles/hello_world.dir/hello_world.cpp.o"
+}
+]
