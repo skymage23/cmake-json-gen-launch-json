@@ -40,7 +40,7 @@ if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL "Windows")
     function(echo_parameter_using_shell INPUT)
         set(ECHO_OUTPUT "")
         execute_process(
-            COMMAND "${POWERSHELL_COMMAND}" "-c" "\"Write-Host '${INPUT}'\""
+            COMMAND "${POWERSHELL_COMMAND}" "-c" "Write-Host" "'${INPUT}'"
             OUTPUT_VARIABLE ECHO_OUTPUT
             COMMAND_ERROR_IS_FATAL ANY
         )
