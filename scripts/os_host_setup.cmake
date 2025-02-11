@@ -53,11 +53,12 @@ elseif(${CMAKE_HOST_SYSTEM_NAME} STREQUAL "Darwin")
     if(NOT FOUND_ALTERNATIVE)
         message(FATAL_ERROR "\"sh\" not found. Did you make changes to your PATH variable?")
     endif()
+    set(SHELL_COMMAND "${FOUND_ALTERNATIVE}")
 
     function(echo_parameter_using_shell INPUT)
         set(ECHO_OUTPUT "")
         execute_process(
-            COMMAND "sh" "-c" "\"echo '${INPUT}'\""
+            COMMAND ${SHELL_COMMAND} -c "echo ${INPUT}"
             OUTPUT_VARIABLE ECHO_OUTPUT
             COMMAND_ERROR_IS_FATAL ANY
         )
