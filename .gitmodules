@@ -7,3 +7,9 @@
 [submodule "third_party/cmake-build-sys-utilities"]
 	path = third_party/cmake-build-sys-utilities
 	url = https://github.com/skymage23/cmake-build-sys-utilities
+[submodule "third_party/cmake-script-test-framework"]
+	path = third_party/cmake-script-test-framework
+	url = https://github.com/skymage23/cmake-script-test-framework
+[submodule "tests/third_party/cmake-script-test-framework"]
+	path = tests/third_party/cmake-script-test-framework
+	url = https://github.com/skymage23/cmake-script-test-framework
