@@ -13,3 +13,6 @@
 [submodule "third_party/development-shell-helpers"]
 	path = third_party/development-shell-helpers
 	url = https://github.com/skymage23/development-shell-helpers
+[submodule "tests/third_party/python-useful-build-sys-tools"]
+	path = tests/third_party/python-useful-build-sys-tools
+	url = https://github.com/skymage23/python-useful-build-sys-tools

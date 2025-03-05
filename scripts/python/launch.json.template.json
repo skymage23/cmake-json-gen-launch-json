@@ -1,0 +1,63 @@
+//Most of the schema here described is based on VS Code's
+//schema for the launch.json file.
+
+//Anything generic is to be a property of the generic object.
+//All else is to be defined in objects dictating to which
+//environments they apply.
+{
+    "language-specific":{
+        "C++": {
+            "identifier": ["CPLUSPLUS"],
+            "externalConsole": "",
+            "logging": "",
+            "visualizerFile": "",
+            "showDisplayString": "",
+            "args": "", //This is prog-specific. This needs to be collected from Python.,
+            "cwd": "",
+            "environment":[], //some progs may need to add more values.
+            "dumpPath": "",
+            "coreDumpPath": "",
+            "miDebuggerServerAddress":"",
+            "debugServerPath": "",
+            "debugServerArgs": "",
+            "serverStarted": "",
+            "filterStdout": "",
+            "filterStderr": "",
+            "serverLaunchTimeout": "",
+            "pipeTransport": "",
+            "hardwareBreakpoints": ""
+
+            //Hello:
+            "os_specific": {
+                "windows":{
+                    "program": "",
+                    "symbolSearchPath": "",
+                    "requireExactSource": "",
+                    "avoidWindowsConsoleRedirection":""
+
+                },
+                "unix": {
+                    "additionalSOLibSearchPath": "",
+                    "MIMode": "",
+                    "miDebuggerPath": "",
+                    "miDebuggerArgs": "",
+                    "stopAtEntry": "",
+                    "stopAtConnect": "",
+                    "setupCommands": [],
+                    "customLaunchSetupCommands": [],
+                    "launchCompleteCommand": "exec-run",
+                    "symbolLoadInfo":""
+
+                },
+
+                "linux": {
+                    "program": "",
+
+                },
+                "macos": {
+                    ""
+                }
+            }//end os-specific
+        }//end C++
+    }//end language-specific
+}//end main

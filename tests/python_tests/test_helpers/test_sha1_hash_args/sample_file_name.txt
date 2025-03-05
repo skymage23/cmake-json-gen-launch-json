@@ -1,5 +1,1 @@
-build
-build/*
-~*
-*~
 sample_target_list_with_hash.txt
