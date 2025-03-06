@@ -7,7 +7,7 @@
 {
     "language-specific":{
         "C++": {
-            "identifier": ["CPLUSPLUS"],
+            "languages": ["CPLUSPLUS"],
             "externalConsole": "",
             "logging": "",
             "visualizerFile": "",
@@ -15,7 +15,7 @@
             "args": "", //This is prog-specific. This needs to be collected from Python.,
             "cwd": "",
             "environment":[], //some progs may need to add more values.
-            "dumpPath": "",
+           
             "coreDumpPath": "",
             "miDebuggerServerAddress":"",
             "debugServerPath": "",
@@ -25,18 +25,23 @@
             "filterStderr": "",
             "serverLaunchTimeout": "",
             "pipeTransport": "",
-            "hardwareBreakpoints": ""
+            "hardwareBreakpoints": "",
+            "processId": "vscode_default",
+            "request": "launch",
+            "sourceFileMap": "" //This needs to be handled in the target-specific files.
 
             //Hello:
             "os_specific": {
                 "windows":{
                     "program": "",
+                    "dumpPath": "",
                     "symbolSearchPath": "",
                     "requireExactSource": "",
-                    "avoidWindowsConsoleRedirection":""
+                    "avoidWindowsConsoleRedirection":"",
+                    "type": "cppvsdbg" //requirement in Windows.
 
                 },
-                "unix": {
+                "unix-like": {
                     "additionalSOLibSearchPath": "",
                     "MIMode": "",
                     "miDebuggerPath": "",
@@ -46,12 +51,12 @@
                     "setupCommands": [],
                     "customLaunchSetupCommands": [],
                     "launchCompleteCommand": "exec-run",
-                    "symbolLoadInfo":""
+                    "symbolLoadInfo":"",
+                    "type": "cppdbg"
 
                 },
 
                 "linux": {
-                    "program": "",
 
                 },
                 "macos": {
