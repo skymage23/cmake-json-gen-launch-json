@@ -1,0 +1,49 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "urn:validation_schema:prog_languages:cplusplus:windows-specific",
+    "$vocabulary": {
+        "https://json-schema.org/draft/2020-12/vocab/core": true,
+        "https://json-schema.org/draft/2020-12/vocab/applicator": true,
+        "https://json-schema.org/draft/2020-12/vocab/unevaluated": true,
+        "https://json-schema.org/draft/2020-12/vocab/validation": true,
+        "https://json-schema.org/draft/2020-12/vocab/meta-data": true,
+        "https://json-schema.org/draft/2020-12/vocab/format-annotation": true,
+        "https://json-schema.org/draft/2020-12/vocab/content": true
+
+    },
+    "title": "windows-specific",
+    "$anchor": "windows-specific",
+    "type": "object",
+    "allOf": [
+        {
+            "$ref": "urn:validation_schema:prog_languages:cplusplus:cplusplus-specific#cplusplus-specific"
+        },
+        {
+            "$ref": "urn:validation_schema:prog_languages:cplusplus:shared_os_properties#shared_os_properties"
+        }
+    ],
+    "properties": {
+        "symbolSearchPath": {
+            "$ref": "urn:validation_schema:global:datatypes#nullableString"
+        },
+        "requireExactSource": {
+            "type": "boolean",
+            "default": false
+        },
+        "avoidWindowsConsoleRedirection": {
+            "type": "boolean",
+            "default": false
+        }, 
+        "MIMode": {
+            "$ref": "urn:validation_schema:prog_languages:cplusplus:datatypes#mi_mode_type",
+            "default": "gdb"
+        },
+        "miDebuggerPath": {
+            "type": "string",
+            "default": "gdb"
+        },
+        "dumpPath": {
+           "$ref": "urn:validation_schema:global:datatypes#nullableString"
+        }
+    }
+}

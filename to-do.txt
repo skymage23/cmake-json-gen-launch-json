@@ -1,0 +1,71 @@
+name should be set based on the target name.
+type is based on the target type in set in CMake (language-dependent).
+
+both of these need to be gleaned from CMake. We also need a way to differentiate
+targets that need testing/debugging and those that don't. Target name will be the
+best way to handle this.
+
+Apparently, "launch.json" is not intended to be able to launch release executables.
+
+Ok. We can use a dual-target structure wherein there are release targets and debug targets.
+
+Or, we can give up and accept we may need to run CMake in two ways: in debug mode and in release mode.
+If we do this, we can skip regenerating the launch.json file.
+
+We can also change how the targets are defined.
+
+Not all targets need launch.json configurations.
+
+How do we differentiate the ones that do?
+--We can take a look at the output.
+
+For that we need to know what VS Code is capable of debugging,
+
+
+The decision of whether or not to generate a "launch.json" config for a target should be based on both its name and its source files.  Targets that are not prefixed with "debug_" are ignored. Adding
+the "debug_" prefix should be done automatically via a "prefix" variable whose value is set to "debug_" only when CMake is executed in the debug configuration. Beyond that, source file lists
+need to be checked for 1.) supported languages and 2.) homogeneity of the source files.  Targets whose
+sources are written in multiple programming languages (with few exceptions) are not to be considered
+valid targets for generating "launch.json" configs. Targets that are not executables should be ignored.
+
+Much of this processing will be done in CMake. As such, I regret to say that it must be done
+sequentially. POTENTIALLY, we could write a Python script to do said processing, and the logic in said script can be made parallelizable.  That said, I am not convinced that we should do this.
+
+Ok. So now that we know how we will be selecting which targets to use when generating the "launch.json" file. We now need to know what information will be passed to the script that does
+the actual generation:
+
+Required argument count: at least 2.
+<path_to_project_base>  #We can't count on ".vscode" existing. Thus, we can't calculate the path ourselves.
+target_name, language #This is all we need from CMake.
+
+If a target needs to have adjustments to its configuration that differ from the global template,
+then it needs to have a separate JSON configuration file in a "<target_name>.launch.json" file under a "target_specific_directory".
+
+
+Cool. But, we still need to specify the path to the global template. We still need the path to the base directory (you know, where the ".vscode" directory is located?
+
+The global template should have a set name.  Let's call it "global.launch.json".  This file needs to be in the project base directory.
+
+Awesome. Now that such is set, let's get back to work.
+
+Actually, I was wondering if we need to do all of the target data processing in Python.
+
+
+On Linux, the maximum (by default) amount of data you can pass via arguments and environment variables is 2MB.  I would assume Windows and macOS are similar. I think we need a more robust
+way to pass in target parameters.  CMake let's us write to temp files.  That would work well.
+
+Ok. So, we'll put the target parameters in a temp file that gets regenerated whenever the ... wait. Why can't we just put all of this info into the target list file we are already generating?  That ... makes sense. In that case, we already have a generator function. we just need to also list all of the target information.
+
+As a reminder, each line of the file (barring the first) needs to be of the following form:
+<target_name>, [list of source files delimited by ',']
+
+The source files are used to derive the target's language.
+
+For now, we just need the following:
+
+My "launch.json" final generation function will receive as input:
+-- The project base directory.
+-- One tuple for each target consisting of "target name" and "language".
+
+
+The CMake target to regenerate the "launch.json" file should also check the template's atimes to see if they have changed.

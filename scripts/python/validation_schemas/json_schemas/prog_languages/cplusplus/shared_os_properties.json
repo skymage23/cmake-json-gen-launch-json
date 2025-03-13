@@ -1,0 +1,22 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "urn:validation_schema:prog_languages:cplusplus:shared_os_properties",
+    "$vocabulary": {
+        "https://json-schema.org/draft/2020-12/vocab/core": true,
+        "https://json-schema.org/draft/2020-12/vocab/applicator": true,
+        "https://json-schema.org/draft/2020-12/vocab/unevaluated": true,
+        "https://json-schema.org/draft/2020-12/vocab/validation": true,
+        "https://json-schema.org/draft/2020-12/vocab/meta-data": true,
+        "https://json-schema.org/draft/2020-12/vocab/format-annotation": true,
+        "https://json-schema.org/draft/2020-12/vocab/content": true
+
+    },
+    "title": "shared_os_properties",
+    "$anchor": "shared_os_properties",
+    "type": "object",
+    "properties": {
+        "miDebuggerArgs": {
+            "$ref": "urn:validation_schema:global:datatypes#nullableString"
+        }
+    }
+}

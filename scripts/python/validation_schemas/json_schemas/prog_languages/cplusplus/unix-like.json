@@ -1,0 +1,30 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "urn:validation_schema:prog_languages:cplusplus:unix-like",
+    "$vocabulary": {
+        "https://json-schema.org/draft/2020-12/vocab/core": true,
+        "https://json-schema.org/draft/2020-12/vocab/applicator": true,
+        "https://json-schema.org/draft/2020-12/vocab/unevaluated": true,
+        "https://json-schema.org/draft/2020-12/vocab/validation": true,
+        "https://json-schema.org/draft/2020-12/vocab/meta-data": true,
+        "https://json-schema.org/draft/2020-12/vocab/format-annotation": true,
+        "https://json-schema.org/draft/2020-12/vocab/content": true
+
+    },
+    "title": "unix-like",
+    "$anchor": "unix-like",
+    "type": "object",
+    "allOf": [
+        {
+            "$ref": "urn:validation_schema:prog_languages:cplusplus:shared_os_properties#shared_os_properties"
+        },
+        {
+            "$ref": "urn:validation_schema:prog_languages:cplusplus:cplusplus-specific#cplusplus-specific"
+        }
+    ],
+    "properties": {
+        "coreDumpPath": {
+            "$ref": "urn:validation_schema:global:datatypes#nullableString" 
+        }
+    }
+}

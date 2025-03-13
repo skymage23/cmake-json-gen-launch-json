@@ -1,0 +1,31 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "urn:validation_schema:prog_languages:cplusplus:hardware_breakpoints",
+    "$vocabulary": {
+        "https://json-schema.org/draft/2020-12/vocab/core": true,
+        "https://json-schema.org/draft/2020-12/vocab/applicator": true,
+        "https://json-schema.org/draft/2020-12/vocab/unevaluated": true,
+        "https://json-schema.org/draft/2020-12/vocab/validation": true,
+        "https://json-schema.org/draft/2020-12/vocab/meta-data": true,
+        "https://json-schema.org/draft/2020-12/vocab/format-annotation": true,
+        "https://json-schema.org/draft/2020-12/vocab/content": true
+    },
+    "title": "cplusplus-specific",
+    "$anchor": "hardware_breakpoints",
+    "type": "object",
+    "properties": {
+        "require": {
+            "type": "boolean",
+            "default": false
+        },
+        "limit":{
+            "$ref": "#/$defs/nonNegativeIntegerDefault0"
+        }
+    },
+
+    "$defs": {
+        "nonNegativeIntegerDefault0": {
+            "$ref": "urn:validation_schema:global:datatypes#nonNegativeIntegerDefault0"
+        }      
+    }
+}

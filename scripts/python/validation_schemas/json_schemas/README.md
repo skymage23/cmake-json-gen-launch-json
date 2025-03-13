@@ -1,0 +1,3 @@
+These files define the JSON schema for the template JSON files. By necessity, they are very similar to the "launch.json" schema used in Visual Studio Code.  Therefore, if you want to have to a full understanding of what all of these properties are, what they do, and their expected values, please read the webpage corresponding to the properties according to the programming language of the CMake target to be processed.
+
+C++: https://code.visualstudio.com/docs/cpp/launch-json-reference

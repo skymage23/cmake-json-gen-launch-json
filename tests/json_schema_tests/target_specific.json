@@ -1,0 +1,9 @@
+{
+    "args": "--not-real --ultra-not-real",
+    "language-specific": {
+        "C++": {
+            "serverStarted": "slovenly shaken",
+            "filterStdout": true
+        }
+    }
+}

@@ -1,0 +1,48 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "urn:validation_schema:global:schema_main",
+    "$vocabulary": {
+        "https://json-schema.org/draft/2020-12/vocab/core": true,
+        "https://json-schema.org/draft/2020-12/vocab/applicator": true,
+        "https://json-schema.org/draft/2020-12/vocab/unevaluated": true,
+        "https://json-schema.org/draft/2020-12/vocab/validation": true,
+        "https://json-schema.org/draft/2020-12/vocab/meta-data": true,
+        "https://json-schema.org/draft/2020-12/vocab/format-annotation": true,
+        "https://json-schema.org/draft/2020-12/vocab/content": true
+    },
+    "title": "schema_main",
+    "type": "object",
+    "allOf": [
+        {
+            "$ref": "urn:validation_schema:global:general_properties#general_properties"
+        },
+        {
+            "$ref": "urn:validation_schema:global:language_specific#language_specific"
+        }
+    ],
+    "properties": {
+        "os_specific": {
+            "windows": {
+                "allOf": [
+                    {
+                        "$ref": "urn:validation_schema:global:general_properties#general_properties"
+                    }
+                ]
+            },
+            "osx":{
+                "allOf": [
+                    {
+                        "$ref": "urn:validation_schema:global:general_propertiesgeneral_properties"
+                    }
+                ]
+            },
+            "linux": {
+                "allOf": [
+                    {
+                        "$ref": "urn:validation_schema:global:general_properties#general_properties"   
+                    }
+                ]
+            }
+        }
+    } 
+}

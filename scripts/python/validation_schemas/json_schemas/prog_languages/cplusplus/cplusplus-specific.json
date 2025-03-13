@@ -1,0 +1,136 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "urn:validation_schema:prog_languages:cplusplus:cplusplus-specific",
+    "$vocabulary": {
+        "https://json-schema.org/draft/2020-12/vocab/core": true,
+        "https://json-schema.org/draft/2020-12/vocab/applicator": true,
+        "https://json-schema.org/draft/2020-12/vocab/unevaluated": true,
+        "https://json-schema.org/draft/2020-12/vocab/validation": true,
+        "https://json-schema.org/draft/2020-12/vocab/meta-data": true,
+        "https://json-schema.org/draft/2020-12/vocab/format-annotation": true,
+        "https://json-schema.org/draft/2020-12/vocab/content": true
+    },
+    "title": "cplusplus-specific",
+    "type": "object",
+    "$anchor": "cplusplus-specific",
+    "properties": {
+        "additionalSOLibSearchPath": {
+            "$ref": "#/$defs/nullableString"
+        },
+        "externalConsole": {
+            "type": "boolean",
+            "default": true 
+        }, 
+        "logging": {
+            "enum": [
+                "exceptions",
+                "moduleLoad",
+                "programOutput",
+                "engineLogging",
+                "trace",
+                "traceRespose"
+            ]
+        },
+        "visualizerFile": {
+            "$ref": "#/$defs/nullableString"
+        },
+        "showDisplayString": {
+            "type": "boolean",
+            "default": false
+        },
+        "stopAtEntry": {
+            "type": "boolean",
+            "default": false
+        },
+        "stopAtConnect": {
+            "type": "boolean",
+            "default": false
+        },
+        "setupCommands": {
+            "type": "array",
+            "item": {
+                "type": "object"
+            }
+        },
+        "customLaunchSetupCommands": {
+            "type": "array",
+            "item": {
+                "type": "object"
+            }
+        },
+        "launchCompleteCommand": {
+            "type": "string",
+            "enum": [
+                "exec-run",
+                "exec-continue",
+                "None"
+            ],
+            "default": "exec-run"
+        },
+        "symbolLoadInfo": {
+            "type": "object",
+            "properties": {
+                "loadAll": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "exceptionList": {
+                    "$ref": "#/$defs/nullableString"
+                }
+            }
+        },
+        "miDebuggerServerAddress": {
+            "$ref": "#/$defs/nullableString"
+        },
+        "debugServerPath": {
+            "$ref": "#/$defs/nullableString"
+        },
+        "debugServerArgs": {
+            "$ref": "#/$defs/nullableString"
+        },
+        "serverStarted": {
+            "$ref": "#/$defs/nullableString"
+        },
+        "filterStdout": {
+            "type": "boolean",
+            "default": true
+        },
+        "filterStderr": {
+            "type": "boolean",
+            "default": false
+        },
+        "serverLaunchTimeout": {
+            "$ref": "#/$defs/nonNegativeIntegerDefault0",
+            "default": 10000          
+        },
+        "pipeTransport": {
+            "$ref": "urn:validation_schema:prog_languages:cplusplus:pipe_transport#pipe_transport" 
+        },
+        "hardwareBreakpoints": {
+            "$ref": "urn:validation_schema:prog_languages:cplusplus:hardware_breakpoints#hardware_breakpoints"
+        },
+        "processId": {
+            "type": "string",
+            "default": "${command:pickProcess}"
+        },
+        "request": {
+            "type": "string",
+            "enum": ["launch", "attach"],
+            "default": "attach"
+        },
+        "targetArchitecture": {
+            "$ref": "#/$defs/nullableString"
+        },
+        "sourceFileMap": {
+            "type": "object"
+        }
+    }, 
+    "$defs": {
+        "nullableString": {
+            "$ref": "urn:validation_schema:global:datatypes#nullableString"
+        }, 
+        "nonNegativeIntegerDefault0": {
+            "$ref": "urn:validation_schema:global:datatypes#nonNegativeIntegerDefault0"
+        }
+    }
+}

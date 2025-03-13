@@ -11,8 +11,8 @@
 	path = tests/third_party/cmake-script-test-framework
 	url = https://github.com/skymage23/cmake-script-test-framework
 [submodule "third_party/development-shell-helpers"]
-	path = third_party/development-shell-helpers
-	url = https://github.com/skymage23/development-shell-helpers
+	path = third_party/development_shell_helpers
+	url = https://github.com/skymage23/development_shell_helpers.git
 [submodule "tests/third_party/python-useful-build-sys-tools"]
 	path = tests/third_party/python-useful-build-sys-tools
 	url = https://github.com/skymage23/python-useful-build-sys-tools
