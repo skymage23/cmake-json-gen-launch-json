@@ -66,45 +66,9 @@ def _get_sha1_schema_hash():
 
 
 def _compare_schema_hash():
-    #pre_calcd_hash = "145ee7d94a51177c91aaa9ead22311e4bc478c07"
-    #calcd_hash = _get_sha1_schema_hash()
-    #return pre_calcd_hash == calcd_hash
-    return True #temp
-
-#def _get_loaded_registry_and_main_schema():
-#    schema_dir = pathlib.Path(__file__).parent / "json_schemas"
-#    json_temp = None
-#
-#    dir_temp = None
-#    check_stack = []
-#    child_dirs = None
-#    registry = referencing.Registry()
-#    resource = None
-#
-#    check_stack.append(schema_dir)
-#    regex = re.compile("\\.json$")
-#
-#    #load the first
-#    while not len(check_stack) <= 0:
-#        dir_temp = check_stack.pop()
-#        for item in dir_temp.iterdir():
-#            if(
-#                (not item.is_dir()) and
-#                (not regex.search(item.suffix) is None)
-#            ):
-#                print("Loading \"{}\"\n".format(item))
-#                with open((schema_dir / item), "r") as file: 
-#                    json_temp = json.load(file)
-#                resource = referencing.Resource.from_contents(json_temp)
-#                registry = resource @ registry
-#            else:
-#                if child_dirs is None:
-#                    child_dirs = []
-#                child_dirs.append(item)
-#        #if child_dirs is not None:
-#        #   for item in child_dirs:
-#        #        check_stack.append(item)
-#    return registry
+    pre_calcd_hash = "5279f39f563b71224ea13baf55be10b083ac5738"
+    calcd_hash = _get_sha1_schema_hash()
+    return pre_calcd_hash == calcd_hash
 
 def _get_loaded_registry_and_main_schema():
     registry = referencing.Registry()
