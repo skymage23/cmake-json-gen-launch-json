@@ -4,15 +4,20 @@
 [submodule "tests/third_party/cmake-script-test-framework"]
 	path = tests/third_party/cmake-script-test-framework
 	url = https://github.com/skymage23/cmake-script-test-framework
+	branch = main
 [submodule "tests/third_party/python-useful-build-sys-tools"]
 	path = tests/third_party/python-useful-build-sys-tools
 	url = https://github.com/skymage23/python-useful-build-sys-tools
+	branch = main
 [submodule "third_party/cmake-build-sys-utilities"]
 	path = third_party/cmake-build-sys-utilities
 	url = https://github.com/skymage23/cmake-build-sys-utilities
+	branch = main
 [submodule "third_party/development_shell_helpers"]
 	path = third_party/development_shell_helpers
 	url = https://github.com/skymage23/development_shell_helpers
+	branch = main
 [submodule "third_party/python-useful-build-sys-tools"]
 	path = third_party/python-useful-build-sys-tools
 	url = https://github.com/skymage23/python-useful-build-sys-tools
+	branch = main
