@@ -9,8 +9,8 @@ dir="$script_dir"
 while [ ! -e "$dir/LICENSE" ]; do
     dir="$(dirname $dir)"
 done
-dev_shell_helper_dir="$dir/third_party/development-shell-helpers/imports/posix_shell/Universal"
-. "$dev_shell_helper_dir/repo-utils.sh"
+dev_shell_helper_dir="$dir/third_party/development_shell_helpers/imports/posix_shell/Universal"
+. "$dev_shell_helper_dir/repo_utils.sh"
 
 #By default, this script uses the system-wide text-to-byte encoding.
 

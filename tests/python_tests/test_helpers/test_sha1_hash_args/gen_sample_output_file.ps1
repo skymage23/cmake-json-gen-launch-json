@@ -1,6 +1,6 @@
 #!/usr/bin/pwsh
-Import-Module -Name "../../../../third_party/development-shell-helpers/imports/PowerShell/Universal/repo-utils.psm1"
-Import-Module -Name "../../../../third_party/development-shell-helpers/imports/PowerShell/Specific/ps-utils.psm1"
+Import-Module -Name "../../../../third_party/development_shell_helpers/imports/PowerShell/Universal/repo_utils.psm1"
+Import-Module -Name "../../../../third_party/development_shell_helpers/imports/PowerShell/Specific/ps-utils.psm1"
 
 function Get-SampleDirPath {
     $curr_file = $PSScriptRoot
