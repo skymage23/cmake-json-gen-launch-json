@@ -1,6 +1,6 @@
 #!/bin/sh
-
-#Locate project base:
+#LOCALE
+##Locate project base:
 echo "this_file: $0"
 script_dir="$(realpath $(dirname $0))"
 echo "script_dir: $script_dir"
@@ -31,7 +31,7 @@ fi
 
 SAMPLE_FILE_NAME="$(cat $script_dir/sample_file_name.txt)"
 
-TEMP_FILE_PATH=$(mktemp $TEMP_FILE_NAME)
+TEMP_FILE_PATH="$(mktemp $TEMP_FILE_NAME)"
 
     
 

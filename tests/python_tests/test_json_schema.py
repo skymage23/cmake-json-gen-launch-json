@@ -1,7 +1,6 @@
 import unittest
 
 import importlib
-import json
 import pathlib
 
 import initializer

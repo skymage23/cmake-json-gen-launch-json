@@ -27,6 +27,7 @@ function Get-SampleFileName {
     return Join-Path -Path $sample_dir_path -ChildPath $lines[0]
 }
 
+
 function Get-SampleTargetList {
     param(
         [Parameter(Mandatory=$true)]
@@ -38,10 +39,16 @@ function Get-SampleTargetList {
          Write-RepoCorruptMessage
          return $null
     }
-    [string[]]$lines = Get-Content -Path $filepath
+    [string[]]$lines = Get-Content -Path $filepath -Encoding utf8
+    #$content = Get-Content -Path $filepath -AsByteStream -Raw
+
     if($lines.Length -le 0){
         Write-RepoCorruptMessage
         return $null
+    }
+    
+    for( $i = 0; $i -lt $lines.Length; $i++){
+        $lines[$i] = $lines[$i].ToLower()
     }
     return $lines
 }
@@ -52,18 +59,16 @@ function Get-HashForTargetList {
         [Parameter(Mandatory=$true)]
         [string[]] $target_list
     )
-    $byte_hash = ""
-    $str_builder = $null
-    $text_encoder = [System.Text.Encoding]::Default
-    $str_builder = New-Object System.Text.StringBuilder
+    $str_builder =  New-Object -TypeName "System.Text.StringBuilder"
+    $byte_hash = $null
+    $data_blob = [Byte[]]
+    $text_encoder = New-Object -TypeName "System.Text.UTF8Encoding" $false
     
+    [System.Array]::Sort($target_list)
     foreach($str in $target_list){
-        $str = $str.ToLower()
-        $null = $str_builder.AppendLine($str)
-    }
+        $null = $str_builder.Append($str.Trim())
+    } 
     $data_blob = $text_encoder.GetBytes($str_builder.ToString())
-    
-
     Use-InThisBlockOnly([System.Security.Cryptography.SHA1]::Create()){
         param(
             [System.Security.Cryptography.SHA1]$hasher
@@ -84,19 +89,36 @@ function Get-HashForTargetList {
     return $str_builder.ToString()
 }
 
+
+#Doing the writes this way ensures we are writing using UTF-8 with no BOM.
 function Write-TargetListFileWithHash {
     param(
         [Parameter(Mandatory=$true)]
-        [string]$filename,
+        [string]$filepath,
         [Parameter(Mandatory=$true)]
         [string]$hash,
         [Parameter(Mandatory=$true)]
         [string[]]$target_list
     )
-         $hash > $filename
-         foreach($str in $target_list){
-            $str >> $filename
-         } 
+         $encoder = New-Object -TypeName "System.Text.UTF8Encoding" $false 
+         $fileStream = $null
+         $streamWriter = $null
+
+         $newFile = New-Item -Force -Path $(Split-Path -Path $filepath -Parent) -Name $(Split-Path -Path $filepath -Leaf)
+         try {
+             $fileStream = $newFile.OpenWrite()
+             $streamWriter = [System.IO.BinaryWriter]::new($fileStream)
+             
+             #Write stuff
+             $streamWriter.Write($encoder.GetBytes("{0}`n" -f $hash))
+             foreach($item in $target_list){
+                 $streamWriter.Write($encoder.GetBytes("{0}`n" -f $item))
+             }
+         }
+         finally {
+             $streamWriter.Dispose()
+             $fileStream.Dispose()
+         }
 }
 
 
@@ -114,11 +136,10 @@ function main {
     
     $target_list = $(Get-SampleTargetList -sample_dir_path $sample_dir_path) | Sort-Object
     if ($null -eq $target_list) {
-
         exit
     }
     $hash = Get-HashForTargetList -target_list $target_list
-    Write-TargetListFileWithHash -filename $file_with_hash_filename -hash $hash -target_list $target_list
+    Write-TargetListFileWithHash -filepath $file_with_hash_filename -hash $hash -target_list $target_list
 }
 
 main

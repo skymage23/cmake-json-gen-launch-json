@@ -1,4 +1,3 @@
-import argparse
 import hashlib
 import sys
 
@@ -17,7 +16,7 @@ to it, followed by the list of targets with 1 target per line.
 
 class ApplicationSingleton:
     def __init__(self, output_file, target_list):
-        self.sys_encoding = sys.getdefaultencoding()
+        self.encoding = "utf-8"
         self.output_file = output_file
         self.target_list = target_list
 
@@ -45,24 +44,28 @@ def parse_args():
     return ApplicationSingleton(output_file, target_list)
     
 def hash_target_list(app_singleton):
-    encoder = lambda text: text.encode(app_singleton.sys_encoding)
+    encoder = lambda text: text.encode(encoding = app_singleton.encoding)
 
     hasher = hashlib.sha1()
+    new_list = []
     for elem in app_singleton.target_list:
+        new_list.append(elem.lower().strip())
+
+    for elem in sorted(new_list):
+        if '\n' in elem:
+            print("has newline")
         hasher.update(encoder(elem))
 
     return hasher.hexdigest()
 
 def get_stored_hash(app_singleton):
-    #def_encoding = app_singleton.sys_encoding
+    #def_encoding = app_singleton.encoding
     hash = None
-    with open(app_singleton.output_file, "r") as file:
+    with open(app_singleton.output_file, "r", encoding=app_singleton.encoding) as file:
         hash = file.readline()
     hash = hash.strip()
     return hash
 
-#0 = hashes are equal
-#1 = hashes are not equal.
 def hash_and_compare(app_singleton):
     calculated_hash = hash_target_list(app_singleton)
     stored_hash = get_stored_hash(app_singleton)
@@ -72,10 +75,18 @@ def hash_and_compare(app_singleton):
     else:
         return False, calculated_hash
 
-
+#While we clean out newlines for hash calculation,
+#they are still needed when writing to the file.
+#Hence, if there are no newlines in the input,
+#we add them.
 def write_target_list_file(hash, app_singleton):
-    list_to_write = ["{}\n".format(hash)] + app_singleton.target_list
-    with open(app_singleton.output_file, "w") as file:
+    temp = None
+    list_to_write = ["{}\n".format(hash)]
+    for i in range(0, len(app_singleton.target_list)):
+        temp = app_singleton.target_list[i]
+        list_to_write.append("{}\n".format(temp) if (not '\n' in temp) else temp)
+
+    with open(app_singleton.output_file, "w", encoding=app_singleton.encoding) as file:
         file.writelines(list_to_write)
     
 #How do we cleanly inform the user that they do not
