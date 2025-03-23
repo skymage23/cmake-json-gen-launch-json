@@ -1,0 +1,6 @@
+732bc7c72457b75d98de13486276629e6addef07
+dorks,python,/home/user/wait_till_i_get_my_hands_on_you,false
+hi_eddy,cplusplus,/home/user/hahaha/build,false
+if_may_interject,cplusplus,/home/user/sockhead,true
+son_of_a_sheperd,python,/home/user/away_with_you,true
+sucker,cplusplus,/home/user/jawbreakers,true

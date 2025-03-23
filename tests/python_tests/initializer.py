@@ -16,3 +16,4 @@ def initialize():
         sys.path.append(
             shared_data.third_party_dir.__str__()
         )
+        

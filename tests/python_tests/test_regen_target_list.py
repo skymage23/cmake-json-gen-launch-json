@@ -136,14 +136,48 @@ class TestRegenTargetList(unittest.TestCase):
         self.app_singleton.output_file = target_filepath
         sha1hash.write_target_list_file(calcd_hash, self.app_singleton)
 
-        written_hash = sha1hash.get_stored_hash(self.app_singleton)
+        unrecoverable_error, written_hash = sha1hash.get_stored_hash(self.app_singleton)
 
+        self.assertFalse(unrecoverable_error)
         self.assertEqual(calcd_hash, written_hash)
 
-    def test_hash_and_compare(self):
-        py_digest = sha1hash.hash_target_list(self.app_singleton)
-        target_filepath = (sha1_test_helper_dir / "generated_target_list_file.txt").__str__()
-        self.app_singleton.output_file = target_filepath
-        sha1hash.write_target_list_file(py_digest, self.app_singleton)
 
-        self.assertTrue((sha1hash.hash_and_compare(self.app_singleton))[0])
+    def test_run_from_cli(self):
+        target_filepath = (sha1_test_helper_dir / "generated_target_list_file.txt").__str__()
+        hash, sample_file_lines = TestRegenTargetList.load_hash_and_target_list_from_file(
+            self.sample_file_name
+        )
+
+        process_ret = subprocess.run(
+            [
+                sys.executable, 
+                (shared_data.main_python_path / "sha1-hash-args.py").__str__(),
+                "generated_target_list_file.txt"
+            ] + sample_file_lines,
+            capture_output=False,
+            cwd=sha1_test_helper_dir.__str__(),
+            stdout=sys.stdout,
+            stderr=sys.stderr
+        )
+
+        with open(target_filepath, 'r', encoding="utf-8") as file:
+            gen_file_lines = file.readlines()
+
+        self.assertEqual(process_ret.returncode, 0)
+        
+        file_hash = gen_file_lines[0].strip()
+        self.assertEqual(file_hash, hash)
+
+
+    def test_run_cli_too_few_args(self):
+        process_ret = subprocess.run(
+            [
+                sys.executable, 
+                (shared_data.main_python_path / "sha1-hash-args.py").__str__()
+            ],
+            capture_output=True,
+            cwd=sha1_test_helper_dir.__str__(),
+        )
+
+        self.assertEqual(process_ret.returncode, 1)
+        self.assertEqual(process_ret.stderr.decode(), f"Too few arguments.\n")

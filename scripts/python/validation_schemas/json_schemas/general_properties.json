@@ -10,7 +10,7 @@
         "https://json-schema.org/draft/2020-12/vocab/format-annotation": true,
         "https://json-schema.org/draft/2020-12/vocab/content": true
     },
-    "title": "cplusplus-specific",
+    "title": "general_properties",
     "type": "object",
     "$anchor": "general_properties",
     "properties": {

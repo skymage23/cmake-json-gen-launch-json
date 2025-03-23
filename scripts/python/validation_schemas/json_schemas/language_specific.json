@@ -17,7 +17,7 @@
         "language-specific": {
             "type": "object",
             "properties": {
-                "C++": {
+                "cplusplus": {
                     "$ref": "urn:validation_schema:prog_languages:cplusplus#cplusplus-specific"
                 }   
             }

@@ -1,0 +1,67 @@
+{
+    'generic': {
+        'args': '--this-is-fake --so-is-this -f', 
+        'cwd': '/home/user/workspace', 
+        'environment': {'FAKE_ENV': 'THIS IS FAKE'}
+    }, 
+    'cplusplus': {
+        'args': '--this-is-fake --so-is-this -f', 
+        'cwd': '/home/user/workspace', 
+        'environment': {'FAKE_ENV': 'THIS IS FAKE'}, 
+        'additionalSOLibSearchPath': None, 
+        'externalConsole': True, 
+        'logging': 'exceptions', 
+        'visualizerFile': None, 
+        'showDisplayString': True, 
+        'stopAtEntry': False, 
+        'stopAtConnect': False, 
+        'setupCommands': [], 
+        'customLaunchSetupCommands': [], 
+        'launchCompleteCommand': 'exec-run', 
+        'symbolLoadInfo': {
+            'loadAll': True, 
+            'exceptionList': None
+        },
+        'miDebuggerServerAddress': None, 
+        'debugServerPath': None, 
+        'debugServerArgs': None, 
+        'serverStarted': None, 
+        'filterStdout': False, 
+        'filterStderr': False, 
+        'serverLaunchTimeout': 100000, 
+        'pipeTransport': {
+            'pipeCwd': '/home/user/tmp', 
+            'pipeProgram': '/usr/bin/ssh', 
+            'pipeArgs': ['user@theserver.net.com.org'], 
+            'debuggerPath': '/usr/bin/gdb'
+        },
+        'hardware_breakpoints': {
+            'require': False, 
+            'limit': 10
+        }, 
+        'processId': '${command:pickProcess}', 
+        'request': 'launch', 
+        'targetArchitecture': 'x86-64', 
+        'sourceFileMap': {}, 
+        'miDebuggerArgs': '', 
+        'windows': {
+            'symbolSearchPath': 'C:\\Users\\user\\Document\\coding\\native\\symbols', 
+            'requireExactSource': False, 
+            'MIMode': 'gdb', 
+            'miDebuggerPath': 'C:\\Users\\user\\bin\\gdb', 
+            'miDebuggerArgs': None, 'dumpPath': 
+            'C:\\Users\\users\\Document\\coding\\native\\core_dumps'
+        }, 
+        'osx': {
+            'coreDumpPath': '/home/user/workspace',
+            'MIMode': 'lldb',
+            'miDebuggerPath': 'lldb',
+            'miDebuggerArgs': None
+        },
+        'linux': {
+            'miDebuggerPath': '/usr/bin/gdb', 
+            'miDebuggerArgs': None, 
+            'coreDumpPath': '/home/user/workspace'
+        }
+    }
+}

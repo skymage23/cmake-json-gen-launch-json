@@ -7,8 +7,9 @@ import referencing
 import re
 import sys
 
-validation_schema_dirs = pathlib.Path(__file__).parent
-python_dir = validation_schema_dirs.parent
+validation_schema_dir = pathlib.Path(__file__).parent
+json_schema_dir = (validation_schema_dir / "json_schemas")
+python_dir = validation_schema_dir.parent
 scripts_dir = python_dir.parent
 proj_base = scripts_dir.parent
 third_party_dir = proj_base / "third_party"
@@ -19,28 +20,7 @@ import development_shell_helpers.imports.Python3.Universal.repo_utils as repo_ut
 #We have two functions that need to iterate through the JSON files
 #in the schema. Why should we duplicate the looping code?
 def _iterate_through_json_schema_files_and_run_func_on_each(func):
-    schema_dir = pathlib.Path(__file__).parent / "json_schemas"
-    #dir_temp = None
-    #check_stack = []
-    #child_dirs = None
-
-    #check_stack.append(schema_dir)
-    #regex = re.compile("\\.json$")
-
-    #load the first
-    #while not len(check_stack) <= 0:
-    #    dir_temp = check_stack.pop()
-    #    for item in dir_temp.iterdir():
-    #        if(
-    #            (not item.is_dir()) and
-    #            (not regex.search(item.suffix) is None)
-    #        ):
-    #            func(item)    #run_lambda here:
-    #        elif (item.is_dir()):
-    #            if child_dirs is None:
-    #                child_dirs = []
-    #            child_dirs.append(item)
-    for root, _, files in os.walk(schema_dir.__str__()):
+    for root, _, files in os.walk(json_schema_dir.__str__()):
         for file in sorted(files):
             if file.endswith(".json"):
                 full_file_path = os.path.join(root, file)
@@ -66,7 +46,7 @@ def _get_sha1_schema_hash():
 
 
 def _compare_schema_hash():
-    pre_calcd_hash = "5279f39f563b71224ea13baf55be10b083ac5738"
+    pre_calcd_hash = "acb617e02bdb10055b59edf7f9f83cf89ee136e6"
     calcd_hash = _get_sha1_schema_hash()
     return pre_calcd_hash == calcd_hash
 
@@ -113,4 +93,11 @@ def validate_json(filename, err_writer=lambda msg:print( msg, file=sys.stderr)):
     except Exception as err:
         err_writer(err.__str__())
         retval = None
+    return retval
+
+def get_supported_programming_languages():
+    retval = []
+    for root, dirs, files in os.walk((json_schema_dir/ "prog_languages").__str__()):
+        retval.extend([d for d in dirs])
+        del dirs[:]
     return retval

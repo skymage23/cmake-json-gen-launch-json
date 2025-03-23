@@ -1,0 +1,68 @@
+{ 
+     "args": "--this-is-fake --so-is-this -f",
+     "cwd": "/home/user/workspace",
+     "environment": {
+         "FAKE_ENV": "THIS IS FAKE"
+     },
+     "language-specific": {
+         "cplusplus": {
+             "additionalSOLibSearchPath": null,
+             "externalConsole": true,
+             "logging": "exceptions",
+             "visualizerFile": null,
+             "showDisplayString": true,
+             "stopAtEntry": false,
+             "stopAtConnect": false,
+             "setupCommands": [],
+             "customLaunchSetupCommands": [],
+             "launchCompleteCommand": "exec-run",  
+             "symbolLoadInfo": {
+                 "loadAll": true,
+                 "exceptionList": null
+             },
+             "miDebuggerServerAddress": null,
+             "debugServerPath": null,
+             "debugServerArgs": null,
+             "serverStarted": null,
+             "filterStdout": false,
+             "filterStderr": false,
+             "serverLaunchTimeout": 100000,
+             "pipeTransport": {
+                 "pipeCwd": "/home/user/tmp",
+                 "pipeProgram": "/usr/bin/ssh",
+                 "pipeArgs": ["user@theserver.net.com.org"],
+                 "debuggerPath": "/usr/bin/gdb"
+             },
+             "hardware_breakpoints": {
+                 "require": false,
+                 "limit": 10
+             },
+             "processId": "${command:pickProcess}",
+             "request": "launch",
+             "targetArchitecture": "x86-64",
+             "sourceFileMap": {},
+             "miDebuggerArgs": "",
+             "os_specific": {
+                "windows":{
+                    "symbolSearchPath": "C:\\Users\\user\\Document\\coding\\native\\symbols",
+                    "requireExactSource": false,
+                    "MIMode": "gdb",
+                    "miDebuggerPath": "C:\\Users\\user\\bin\\gdb",
+                    "miDebuggerArgs": null,
+                    "dumpPath": "C:\\Users\\users\\Document\\coding\\native\\core_dumps"
+                },
+                "osx": {
+                    "coreDumpPath": "/home/user/workspace",
+                    "MIMode": "lldb",
+                    "miDebuggerPath": "lldb",
+                    "miDebuggerArgs": null
+                },
+                "linux": {
+                    "miDebuggerPath": "/usr/bin/gdb",
+                    "miDebuggerArgs": null,
+                    "coreDumpPath": "/home/user/workspace"
+                }
+            }
+        }
+    }
+}

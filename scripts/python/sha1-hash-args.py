@@ -16,7 +16,7 @@ to it, followed by the list of targets with 1 target per line.
 
 class ApplicationSingleton:
     def __init__(self, output_file, target_list):
-        self.encoding = "utf-8"
+        self.encoding = sys.getdefaultencoding()
         self.output_file = output_file
         self.target_list = target_list
 
@@ -61,19 +61,20 @@ def hash_target_list(app_singleton):
 def get_stored_hash(app_singleton):
     #def_encoding = app_singleton.encoding
     hash = None
-    with open(app_singleton.output_file, "r", encoding=app_singleton.encoding) as file:
-        hash = file.readline()
-    hash = hash.strip()
-    return hash
+    unrecoverable_error = False
+    try:
+        with open(app_singleton.output_file, "r", encoding=app_singleton.encoding) as file:
+            hash = file.readline()
+        hash = hash.strip()
 
-def hash_and_compare(app_singleton):
-    calculated_hash = hash_target_list(app_singleton)
-    stored_hash = get_stored_hash(app_singleton)
-    
-    if calculated_hash == stored_hash:
-        return True, None
-    else:
-        return False, calculated_hash
+    except FileNotFoundError:
+        hash = None
+    except PermissionError:
+        unrecoverable_error = True
+        print("Unable to open target list file. Permission denied.", file=sys.stderr)
+
+    return unrecoverable_error, hash
+
 
 #While we clean out newlines for hash calculation,
 #they are still needed when writing to the file.
@@ -93,11 +94,15 @@ def write_target_list_file(hash, app_singleton):
 #have permission to write to a given directory?
 def main():
     app_singleton = parse_args()
+    unrecoverable_error = False
 
     calculated_hash = hash_target_list(app_singleton)
-    stored_hash = get_stored_hash(app_singleton)
+    unrecoverable_error, stored_hash = get_stored_hash(app_singleton)
+
+    if(unrecoverable_error):
+        print("" ,file=sys.stderr)    
     
-    if calculated_hash != stored_hash:
+    if (stored_hash is None) or (calculated_hash != stored_hash):
         write_target_list_file(calculated_hash, app_singleton)
 
     return 0
