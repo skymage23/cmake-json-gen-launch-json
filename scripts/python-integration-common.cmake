@@ -1,5 +1,5 @@
 include_guard(GLOBAL)
-find_package(python3)
+find_package(Python3 REQUIRED)
 set(PYTHON_SCRIPT_DIR_PATH "${CMAKE_CURRENT_LIST_DIR}/python")
 set(PYTHON_SCRIPT_WORKING_DIR "${CMAKE_CURRENT_LIST_DIR}/..")
 

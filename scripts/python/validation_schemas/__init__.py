@@ -88,7 +88,7 @@ def validate_json(filename, err_writer=lambda msg:print( msg, file=sys.stderr)):
 
         with open(filename, "r") as file:
             json_temp = json.load(file) 
-        jsonschema.validate(json_temp, schema=main_schema, registry=registry)
+        jsonschema.validate(instance=json_temp, schema=main_schema, registry=registry)
         retval = json_temp
     except Exception as err:
         err_writer(err.__str__())
@@ -97,7 +97,7 @@ def validate_json(filename, err_writer=lambda msg:print( msg, file=sys.stderr)):
 
 def get_supported_programming_languages():
     retval = []
-    for root, dirs, files in os.walk((json_schema_dir/ "prog_languages").__str__()):
+    for _, dirs, _ in os.walk((json_schema_dir/ "prog_languages").__str__()):
         retval.extend([d for d in dirs])
         del dirs[:]
     return retval

@@ -1,6 +1,7 @@
 include_guard(GLOBAL)
 include("${CMAKE_CURRENT_LIST_DIR}/python-integration-common.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/target_list_opts.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/../third_party/cmake-build-sys-utilities/scripts/logging.cmake")
 
 set(cmd_list "")
 list(APPEND cmd_list "${python_cmd_list_template}")

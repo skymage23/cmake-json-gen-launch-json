@@ -20,6 +20,9 @@ class ApplicationSingleton:
         self.output_file = output_file
         self.target_list = target_list
 
+    def __str__(self):
+        return "ApplicationSingleton(output_file={}, target_list={})".format(self.output_file, self.target_list)
+
 def print_err(message):
     print(message, file=sys.stderr)
 
@@ -52,8 +55,6 @@ def hash_target_list(app_singleton):
         new_list.append(elem.lower().strip())
 
     for elem in sorted(new_list):
-        if '\n' in elem:
-            print("has newline")
         hasher.update(encoder(elem))
 
     return hasher.hexdigest()
@@ -92,10 +93,22 @@ def write_target_list_file(hash, app_singleton):
     
 #How do we cleanly inform the user that they do not
 #have permission to write to a given directory?
+def sanity_check_target_list(target_list):
+    if not target_list:
+        print_err("Sanity check failed: Target list is empty.")
+        exit(1)
+    for entry in target_list:
+        if entry.count(",") != 3:
+            print_err(f"Sanity check failed: Malformed entry: {entry}")
+            exit(1)
+    if len(set(target_list)) != len(target_list):
+        print_err("Sanity check failed: Duplicate entries found.")
+        exit(1)
+
 def main():
     app_singleton = parse_args()
+    sanity_check_target_list(app_singleton.target_list)
     unrecoverable_error = False
-
     calculated_hash = hash_target_list(app_singleton)
     unrecoverable_error, stored_hash = get_stored_hash(app_singleton)
 
