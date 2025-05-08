@@ -43,7 +43,6 @@ Is debug: {self.is_debug}
 
 
 class LanguageHandlersAndCallbacks:
-
     def input_validation(self, binary_path, is_debug):
         return errcode_handling.SUCCESS_ERRCODE
 
@@ -151,7 +150,6 @@ def generate_python_json_dict(
         global_template_filepath,
         target_specific_dir
     ):
-
     host_os = "other"
 
     #These platforms have certain configuration rules that apply uniquely to them.
@@ -255,13 +253,14 @@ def get_target_list(filename: str):
 
 def get_sha1_hash(target_list):
     hasher = hashlib.sha1()
-    for elem in sorted(target_list):
+    temp_list = sorted([target.strip() for target in target_list])
+    for elem in temp_list:
         hasher.update(elem.encode())
     return hasher.hexdigest()
 
 #Fix error handling here:
 #unrecoverable_error, list of targets as arrays.
-#Target list record: name, programming language, binary path, is debug
+#Target list record: name, binary path, programming language, is debug
 ERRCODE_TOO_FEW_FIELDS = errcode_handling.register_errcode(
     "TOO_FEW_FIELDS",
     "Target item parse error: too few fields"
@@ -282,6 +281,11 @@ ERRCODE_TARGET_ITEM_IS_DEBUG_EMPTY = errcode_handling.register_errcode(
     "Target item parse error: is_debug cannot be empty."
 )
 
+ERRCODE_TARGET_ITEM_BINARY_PATH_EMPTY = errcode_handling.register_errcode(
+    "TARGET_ITEM_BINARY_PATH_EMPTY",
+    "Target item parse error: binary path cannot be empty."
+)
+
 #Errcode, problematic_entry, parsed_target_array
 def parse_target_list(target_list):
      name = None
@@ -300,11 +304,12 @@ def parse_target_list(target_list):
         name = split_items[0].strip()
         if len(name) == 0:
             return ERRCODE_TARGET_ITEM_NAME_EMPTY, item, None #Name vannot be empty.
-        programming_language = split_items[1].strip()
+        binary_path = split_items[1].strip()
+        if len(binary_path) == 0:
+            return ERRCODE_TARGET_ITEM_BINARY_PATH_EMPTY, item, None #Binary path cannot be empty.
+        programming_language = split_items[2].strip()
         if len(programming_language) == 0:
             return ERRCODE_TARGET_ITEM_PROG_LANG_EMPTY, item, None #Programming language cannot be empty.
-
-        binary_path = split_items[2].strip() if len(split_items[2]) > 0 else None
 
         is_debug_str = split_items[3].strip()
         if len(is_debug_str) == 0:

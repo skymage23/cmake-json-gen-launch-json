@@ -1,4 +1,3 @@
-841de6349ba2e56780c9443f48e7220dee4253bf
 dorks,/home/user/wait_till_i_get_my_hands_on_you,python,false
 hi_eddy,/home/user/hahaha/build,cplusplus,false
 if_may_interject,/home/user/sockhead,cplusplus,true

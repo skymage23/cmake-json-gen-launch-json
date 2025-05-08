@@ -42,27 +42,20 @@ class TestGenLaunchJson(unittest.TestCase):
 
     def test_get_target_list(self):
         errcode, _, targets = gen_launch_json.get_target_list(self.target_list_path.__str__())
-
-        print(errcode_handling.get_message(errcode))
         self.assertEqual(errcode, errcode_handling.SUCCESS_ERRCODE)
         self.assertTrue( "dorks" in targets[0]) 
 
     def test_check_hash(self):
         errcode, hash, targets = gen_launch_json.get_target_list(self.target_list_path.__str__())
-
-        print(errcode_handling.get_message(errcode)) 
         self.assertEqual(errcode, errcode_handling.SUCCESS_ERRCODE)
         calcd_hash = gen_launch_json.get_sha1_hash(targets)
         self.assertEqual(calcd_hash, hash)
 
     def test_parse_target_list(self): 
         errcode, _, targets = gen_launch_json.get_target_list(self.target_list_path.__str__())
-        print(errcode_handling.get_message(errcode))
         self.assertEqual(errcode, errcode_handling.SUCCESS_ERRCODE)
 
         errcode, errd_item, parsed_targets = gen_launch_json.parse_target_list(targets) 
-        print(errcode_handling.get_message(errcode))
-        print(errd_item)
         self.assertEqual(errcode, errcode_handling.SUCCESS_ERRCODE)
         self.assertIsNotNone(parsed_targets)
         self.assertEqual(len(parsed_targets), 5)
@@ -237,7 +230,6 @@ class TestGenLaunchJson(unittest.TestCase):
 
 
         for target in parsed_targets:
-            #breakpoint()
             if target.prog_language in validation_schemas.get_supported_programming_languages():
                 temp = copy.deepcopy(ground_truth_template)
             else:

@@ -51,6 +51,15 @@ function(check_if_debug TARGET_NAME)
     return()
 endfunction()
 
+#These mappings are intended to help ease integration
+#across the whole system.
+function(map_language_to_commonplace_names LANGUAGE RET_VAR_NAME)
+    string(STRIP "${LANGUAGE}" LANGUAGE)
+    if("${LANGUAGE}" STREQUAL "CXX")
+        set(${RET_VAR_NAME} "cplusplus" PARENT_SCOPE)
+    endif()
+endfunction()
+
 #This is NOT going to work as-is due to source file properties not being inherited.
 #What can we do about this?.
 set(TARGET_LANGUAGE "")
@@ -74,9 +83,9 @@ function (get_target_language TARGET_NAME)
     endforeach()
 
     if(NOT "${language_retval}" STREQUAL "")
+        map_language_to_commonplace_names(${language_retval} language_retval)
         set(TARGET_LANGUAGE "${language_retval}" PARENT_SCOPE)
     endif()
-    
 endfunction()
 
 set(BINARY_PATH "")

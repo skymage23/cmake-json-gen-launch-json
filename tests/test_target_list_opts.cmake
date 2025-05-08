@@ -40,7 +40,10 @@ ERROR: ${ERROR}
    file(READ "${SCRATCHPAD_DIR}/build/CMakeFiles/CMakeScratch/target_list.txt" TARGET_LIST_FILE_CONTENTS)
    file(READ "${CMAKE_CURRENT_LIST_DIR}/test_helpers/test_target_list_opts/expected_target_list.txt" EXPECTED_TARGET_LIST_FILE_CONTENTS)
    if(NOT "${TARGET_LIST_FILE_CONTENTS}" STREQUAL "${EXPECTED_TARGET_LIST_FILE_CONTENTS}")
-       message(FATAL_ERROR "Target list file contents do not match expected contents")
+       message(FATAL_ERROR "Target list file contents do not match expected contents"
+        "OUTPUT: ${OUTPUT}"
+        "ERROR: ${ERROR}"
+       )
    endif()
 endmacro()
 add_test_macro(MACRO_NAME test_gen_target_list_file TEST_GROUP "target_list_opts")

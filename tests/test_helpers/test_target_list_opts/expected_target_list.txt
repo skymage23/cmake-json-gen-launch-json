@@ -1,2 +1,2 @@
-e99b778f75f6b0cb432678343c79f9819ef314d1
-hello_world,/workspaces/cmake-json-gen-launch-json/tests/test_helpers/scratchpad/build/hello_world,CXX,false
+90f5971694eb5a03d391015814bff8cfd98b9f3c
+hello_world,/workspaces/cmake-json-gen-launch-json/tests/test_helpers/scratchpad/build/hello_world,cplusplus,false

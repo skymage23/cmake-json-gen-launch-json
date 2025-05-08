@@ -52,7 +52,7 @@ def hash_target_list(app_singleton):
     hasher = hashlib.sha1()
     new_list = []
     for elem in app_singleton.target_list:
-        new_list.append(elem.lower().strip())
+        new_list.append(elem.strip())
 
     for elem in sorted(new_list):
         hasher.update(encoder(elem))
