@@ -32,7 +32,7 @@
             "osx":{
                 "allOf": [
                     {
-                        "$ref": "urn:validation_schema:global:general_propertiesgeneral_properties"
+                        "$ref": "urn:validation_schema:global:general_properties#general_properties"
                     }
                 ]
             },
